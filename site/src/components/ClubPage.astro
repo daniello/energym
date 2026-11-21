@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "./PageHero.astro";
+import SectionHead from "./SectionHead.astro";
+import Timetable from "./Timetable.astro";
+import { clubs, timetables } from "../data/site";
+
+type Props = {
+  clubKey: "new-malden" | "west-ealing";
+  image: string;
+  stamp: string;
+};
+
+const { clubKey, image, stamp } = Astro.props;
+const club = clubs[clubKey];
+const days = timetables[clubKey];
+---
+
+<BaseLayout
+  title={`${club.name} — Energym`}
+  description={`${club.name}: address, opening hours, facilities, timetable and membership.`}
+>
+  <PageHero
+    eyebrow="Club file"
+    title={`${club.shortName.replace(" ", "<br />")}<br /><span style='color:var(--green);'>club.</span>`}
+    lede={`${club.address.join(", ")}. Open early, open late, and built for people who actually train.`}
+    image={image}
+    stamp={stamp}
+    tilt={clubKey === "new-malden" ? "-1.2deg" : "1deg"}
+  />
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="grid grid--3">
+        <article class="card card--ink" data-reveal>
+          <span class="index" style="color:var(--green);">Find us</span>
+          <h3>{club.shortName}</h3>
+          <p>{club.address.join(", ")}</p>
+          <a class="btn btn--sm mt-2" href={club.mapUrl} rel="noopener" target="_blank">Directions</a>
+        </article>
+        <article class="card" data-reveal>
+          <span class="index">Call / mail</span>
+          <h3>Talk to the desk</h3>
+          <p>
+            <a href={`tel:${club.phone.replace(/\s/g, "")}`}>{club.phone}</a><br />
+            <a href={`mailto:${club.email}`}>{club.email}</a>
+          </p>
+        </article>
+        <article class="card card--green" data-reveal>
+          <span class="index">Hours</span>
+          <h3>Open when you need it</h3>
+          {club.hours.map((line) => <p style="font-size:.86rem;margin-bottom:4px;">{line}</p>)}
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="The floor"
+        title="Six zones. One floor."
+        aside="Every zone is named, stocked and ready. This is the full kit list — no stock photos, no maybes."
+      />
+
+      <div class="grid grid--3">
+        {
+          club.zones.map((zone, i) => (
+            <article class="zone" data-reveal style={`--reveal-tilt:${i % 2 === 0 ? "-1deg" : "1deg"};`}>
+              <h3>{zone.name} <span>Zone {String(i + 1).padStart(2, "0")}</span></h3>
+              <p>{zone.blurb}</p>
+              <ul class="chips">
+                {zone.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="panel panel__pad mt-4" data-reveal style="background:var(--pink);color:var(--paper);">
+        <div class="split split--middle">
+          <div>
+            <span class="sticker sticker--paper">The studio</span>
+            <h3 class="mt-2">Over 60 classes a week.</h3>
+            <p style="color:rgba(243,234,215,.8);max-width:50ch;">
+              Circuits, yoga, pilates, boxing, strength, spin, dance and mobility. Book through
+              the Energym Members App.
+            </p>
+          </div>
+          <div class="chips">
+            {club.studio.map((item) => <li style="background:var(--paper);">{item}</li>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="This week"
+        title={`${club.shortName} timetable.`}
+        aside="Classes fill up. Book through the app. TBC slots are being confirmed — call the desk if you're planning around one."
+        href="/timetable"
+        linkLabel="Compare both clubs"
+      />
+      <Timetable id={`${clubKey}-club`} label={`${club.shortName} timetable`} days={days} />
+    </div>
+  </section>
+
+  <section class="section section--green">
+    <div class="wrap center">
+      <h2>Train here.</h2>
+      <p class="mt-2" style="max-width:48ch;margin-inline:auto;">
+        Rolling monthly membership, day passes and annual options. Same price at both clubs.
+      </p>
+      <div class="btn-row mt-2" style="justify-content:center;">
+        <a class="btn btn--ink" href={club.joinUrl} rel="noopener" target="_blank">Join {club.shortName}</a>
+        <a class="btn btn--paper" href="/contact">Book a tour</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

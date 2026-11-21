@@ -1,0 +1,21 @@
+---
+type Props = { items?: string[] };
+const {
+  items = [
+    "New Malden",
+    "West Ealing",
+    "Over 60 classes a week",
+    "Open 6am–11pm",
+    "No contracts",
+    "Two clubs, one mindset",
+  ],
+} = Astro.props;
+
+const loop = [...items, ...items];
+---
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    {loop.map((item) => <span>{item}</span>)}
+  </div>
+</div>

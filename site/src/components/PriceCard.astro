@@ -1,0 +1,13 @@
+---
+import type { Price } from "../data/site";
+
+type Props = { price: Price };
+const { price } = Astro.props;
+---
+
+<article class:list={["price-card", price.featured && "price-card--featured"]}>
+  {price.featured && <span class="sticker sticker--paper" style="align-self:start;margin-bottom:6px;">Most popular</span>}
+  <span class="price-card__label">{price.label}</span>
+  <strong class="price-card__price">{price.price}</strong>
+  <p class="price-card__note">{price.note}</p>
+</article>

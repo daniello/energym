@@ -1,0 +1,24 @@
+---
+import type { CrewMember } from "../data/site";
+
+type Props = { member: CrewMember; index?: number };
+const { member, index = 0 } = Astro.props;
+---
+
+<article
+  class="crew-card"
+  data-crew-card={member.club}
+  data-reveal
+  style={`--reveal-tilt:${index % 2 === 0 ? "-1.4deg" : "1.2deg"}`}
+>
+  <span class="crew-card__tag">PT</span>
+  <div class="comic-photo comic-photo--green crew-card__photo">
+    <img src={member.image} alt={`${member.name}, personal trainer at Energym ${member.club}`} loading="lazy" />
+    <span class="halftone"></span>
+  </div>
+  <div class="crew-card__body">
+    <span class="crew-card__club">{member.club}</span>
+    <h3 class="crew-card__name">{member.name}</h3>
+    <p class="crew-card__bio">{member.bio}</p>
+  </div>
+</article>

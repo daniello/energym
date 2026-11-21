@@ -1,0 +1,43 @@
+---
+import { nav } from "../data/site";
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="Energym home">
+      <img src="/img/brand/energym-logo.png" alt="Energym" width="2478" height="546" />
+      <span class="brand__issue">Issue #01</span>
+    </a>
+
+    <ul class="nav__links" id="site-nav" data-nav-links>
+      {
+        nav.map((item) => {
+          const href = item.href.replace(/\/$/, "") || "/";
+          const active = path === href;
+          return (
+            <li>
+              <a href={item.href} aria-current={active ? "page" : undefined}>
+                {item.label}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <a class="btn btn--sm nav__cta" href="/contact">Book a tour</a>
+
+    <button
+      class="nav__burger"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-burger
+    >
+      <span></span>
+    </button>
+  </div>
+</header>

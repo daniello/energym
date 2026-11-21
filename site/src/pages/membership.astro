@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import PriceCard from "../components/PriceCard.astro";
+import SectionHead from "../components/SectionHead.astro";
+import { clubs, prices } from "../data/site";
+---
+
+<BaseLayout title="Membership — Energym" description="Rolling monthly memberships, day passes and annual options at Energym New Malden and West Ealing.">
+  <PageHero
+    eyebrow="Membership"
+    title="One price.<br /><span style='color:var(--green);'>No games.</span>"
+    lede="Whatever your budget or how you prefer to train, there's a day pass or membership package to suit you. Rolling monthly, one month notice, no contract."
+    image="/img/gym/gym-free-weights.jpeg"
+    stamp="No joining fee"
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="The options"
+        title="Pick your pass."
+        aside="Same prices at both clubs. All memberships include classes, the members app and full access during opening hours."
+      />
+
+      <div class="grid grid--3">
+        {prices.map((price) => <PriceCard price={price} />)}
+      </div>
+
+      <div class="panel panel__pad mt-4" data-reveal style="background:var(--acid);">
+        <div class="split split--middle">
+          <div>
+            <span class="sticker sticker--pink">Good to know</span>
+            <h3 class="mt-2">No labyrinth. No small print maze.</h3>
+            <p style="max-width:52ch;">
+              Monthly is a rolling membership with a one-month notice period. Single month and
+              7-day passes are exactly that. Annual is the most cost-effective way to train.
+              Day passes are available at the desk.
+            </p>
+          </div>
+          <div>
+            <p style="font-family:var(--block);font-size:.78rem;line-height:1.5;">
+              * Our system may not accept foreign bank accounts and phone numbers when signing
+              up. Please attend your local club to sign up directly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Join"
+        title="Pick your club."
+        aside="Both clubs run the same membership. Sign up online through Clubwise, or come in and we'll sort it at the desk."
+      />
+
+      <div class="grid grid--2">
+        {
+          Object.values(clubs).map((club) => (
+            <article class="panel panel--ink panel__pad" data-reveal style="border-color:var(--paper);">
+              <span class="sticker sticker--green">{club.shortName}</span>
+              <h3 class="mt-2" style="color:var(--paper);">{club.name}</h3>
+              <p style="color:rgba(243,234,215,.72);">{club.address.join(", ")}</p>
+              <p style="font-family:var(--block);font-size:.8rem;color:var(--acid);">
+                {club.phone} · {club.email}
+              </p>
+              <p style="font-size:.9rem;color:rgba(243,234,215,.62);">{club.hours[0]}</p>
+              <div class="btn-row mt-2">
+                <a class="btn" href={club.joinUrl} rel="noopener" target="_blank">Join {club.shortName}</a>
+                <a class="btn btn--pink" href={`/${club.slug}`}>Club details</a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--green">
+    <div class="wrap center">
+      <h2>Still deciding?</h2>
+      <p class="mt-2" style="max-width:50ch;margin-inline:auto;">
+        Book a tour, walk the floor and try the kit. No pressure, no clipboard, no contract.
+      </p>
+      <div class="btn-row mt-2" style="justify-content:center;">
+        <a class="btn btn--ink" href="/contact">Book a tour</a>
+        <a class="btn btn--paper" href="/timetable">See the timetable</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

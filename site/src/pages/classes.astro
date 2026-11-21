@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHead from "../components/SectionHead.astro";
+import { classes, classNames } from "../data/site";
+---
+
+<BaseLayout
+  title="Classes — Energym"
+  description="HIIT, boxing, pilates, spin, yoga, strength and more. Over 60 classes a week at Energym."
+>
+  <PageHero
+    eyebrow="The class guide"
+    title="Find your <span style='color:var(--green);'>pulse.</span>"
+    lede="From first-timer to full send. Over 60 classes a week across both clubs, led by coaches who know your name."
+    image="/img/gym/spin-class.jpeg"
+    stamp="Something for every level"
+    tilt="1deg"
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="The hits"
+        title="Start here."
+        aside="The classes that fill up fastest. All levels welcome unless stated otherwise."
+      />
+
+      <div class="grid grid--3">
+        {
+          classes.map((item, i) => (
+            <article class="card card--lift" data-reveal style={`--reveal-tilt:${i % 2 === 0 ? "-.8deg" : ".8deg"};`}>
+              <span class="sticker sticker--green">{item.tag}</span>
+              <h3 class="mt-2">{item.name}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="wrap">
+      <div class="split">
+        <div data-reveal>
+          <p class="eyebrow" style="color:var(--acid);margin-bottom:14px;">The full menu</p>
+          <h2>Every class on the board.</h2>
+          <p class="mt-2" style="color:rgba(243,234,215,.72);max-width:44ch;">
+            If it's on the timetable, it's on this list. If you're not sure which one to start
+            with, ask the desk or book a free induction.
+          </p>
+          <div class="btn-row mt-2">
+            <a class="btn" href="/timetable">Full timetable</a>
+            <a class="btn btn--pink" href="/contact">Ask for a recommendation</a>
+          </div>
+        </div>
+
+        <div class="chips" data-reveal>
+          {classNames.map((name) => <li style="background:var(--paper);">{name}</li>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--green">
+    <div class="wrap">
+      <div class="split split--middle">
+        <div data-reveal>
+          <span class="sticker sticker--pink">Reformer Pilates</span>
+          <h2 class="mt-2">More than a workout.<br />It's a reset.</h2>
+          <p class="mt-2" style="max-width:50ch;">
+            Reformer Pilates lives next door at Reform by Energym, New Malden. Strength, tone,
+            flexibility and a proper mental reset — with a separate timetable and membership.
+          </p>
+          <div class="btn-row mt-2">
+            <a class="btn btn--ink" href="https://www.reformbyenergym.co.uk" rel="noopener" target="_blank">
+              Visit Reform
+            </a>
+          </div>
+        </div>
+        <div class="panel" data-reveal style="transform:rotate(-1deg);">
+          <div class="comic-photo comic-photo--pink" style="aspect-ratio:4/3;">
+            <img src="/img/gym/hero-energym-2021-79.jpeg" alt="Energym training floor" loading="lazy" />
+            <span class="halftone"></span>
+          </div>
+          <span class="sticker" style="position:absolute;bottom:18px;left:18px;">Reform by Energym</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

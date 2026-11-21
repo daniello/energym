@@ -1,0 +1,142 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+  image?: string;
+};
+
+const {
+  title = "ENERGYM — The Comic Issue",
+  description = "Energym New Malden and West Ealing, rebuilt as a comic. Same gym. Same crew. More energy.",
+  image = "/img/brand/og-image.jpeg",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://energym.co.uk");
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/img/brand/energym-logo.png" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={image} />
+    <meta name="theme-color" content="#0b0b0b" />
+    <ClientRouter />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="sr-only" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function setupNav() {
+        const burger = document.querySelector<HTMLButtonElement>("[data-burger]");
+        const links = document.querySelector<HTMLElement>("[data-nav-links]");
+        if (!burger || !links) return;
+        burger.onclick = () => {
+          const open = burger.getAttribute("aria-expanded") === "true";
+          burger.setAttribute("aria-expanded", String(!open));
+          links.classList.toggle("is-open", !open);
+        };
+        links.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", () => {
+            burger.setAttribute("aria-expanded", "false");
+            links.classList.remove("is-open");
+          });
+        });
+      }
+
+      function setupReveals() {
+        const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+        if (!("IntersectionObserver" in window) || reduced) {
+          items.forEach((el) => el.classList.add("in-view"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+        );
+        items.forEach((el) => io.observe(el));
+      }
+
+      function setupTimetable() {
+        document.querySelectorAll<HTMLButtonElement>("[data-timetable-toggle]").forEach((btn) => {
+          btn.onclick = () => {
+            const target = btn.dataset.timetableToggle;
+            document
+              .querySelectorAll<HTMLButtonElement>("[data-timetable-toggle]")
+              .forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+            document.querySelectorAll<HTMLElement>("[data-timetable-panel]").forEach((panel) => {
+              panel.hidden = panel.dataset.timetablePanel !== target;
+            });
+          };
+        });
+      }
+
+      function setupCrewFilter() {
+        document.querySelectorAll<HTMLButtonElement>("[data-crew-filter]").forEach((btn) => {
+          btn.onclick = () => {
+            const club = btn.dataset.crewFilter ?? "all";
+            document
+              .querySelectorAll<HTMLButtonElement>("[data-crew-filter]")
+              .forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+            document.querySelectorAll<HTMLElement>("[data-crew-card]").forEach((card) => {
+              const show = club === "all" || card.dataset.crewCard === club;
+              card.hidden = !show;
+            });
+          };
+        });
+      }
+
+      function setupForm() {
+        document.querySelectorAll<HTMLFormElement>("[data-tour-form]").forEach((form) => {
+          form.onsubmit = (event) => {
+            event.preventDefault();
+            const success = form.parentElement?.querySelector<HTMLElement>(".form-success");
+            if (success) success.classList.add("is-visible");
+            form.reset();
+          };
+        });
+      }
+
+      function setup() {
+        setupNav();
+        setupReveals();
+        setupTimetable();
+        setupCrewFilter();
+        setupForm();
+      }
+
+      setup();
+      document.addEventListener("astro:page-load", setup);
+    </script>
+  </body>
+</html>

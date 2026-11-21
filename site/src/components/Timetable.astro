@@ -1,0 +1,35 @@
+---
+import type { Day } from "../data/site";
+
+type Props = {
+  id: string;
+  label: string;
+  days: Day[];
+  hidden?: boolean;
+};
+
+const { id, label, days, hidden = false } = Astro.props;
+---
+
+<section class="timetable-panel" data-timetable-panel={id} hidden={hidden} aria-label={`${label} timetable`}>
+  <div class="timetable">
+    {
+      days.map((day) => (
+        <div class="timetable__day">
+          <h3>{day.day}</h3>
+          <div class="timetable__slots">
+            {day.slots.length === 0 && <div class="slot slot--tbc"><span class="slot__name">Rest day</span></div>}
+            {day.slots.map((slot) => (
+              <div class:list={["slot", slot.name === "TBC" && "slot--tbc"]}>
+                <span class="slot__name">{slot.name}</span>
+                <span class="slot__meta">{slot.time} · {slot.duration}</span>
+                <span class="slot__meta">{slot.room}</span>
+                {slot.note && <span class="slot__note">{slot.note}</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Timetable from "../components/Timetable.astro";
+import { timetables } from "../data/site";
+---
+
+<BaseLayout
+  title="Timetable — Energym"
+  description="The full weekly class timetable for Energym New Malden and West Ealing."
+>
+  <PageHero
+    eyebrow="This week"
+    title="The timetable."
+    lede="Over 60 classes a week across two clubs. Book through the Energym Members App. TBC slots are being confirmed — call the desk if you're planning around one."
+    image="/img/gym/spin-class.jpeg"
+    stamp="60+ classes"
+    tilt="-1deg"
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-bottom:clamp(24px,4vw,42px);">
+        <div class="timetable-toggle" role="group" aria-label="Choose a club timetable">
+          <button type="button" data-timetable-toggle="new-malden" aria-pressed="true">New Malden</button>
+          <button type="button" data-timetable-toggle="west-ealing" aria-pressed="false">West Ealing</button>
+        </div>
+        <p class="marker" style="font-size:1.05rem;color:var(--pink);margin:0;">
+          Book via the Energym Members App.
+        </p>
+      </div>
+
+      <Timetable id="new-malden" label="New Malden" days={timetables["new-malden"]} />
+      <Timetable id="west-ealing" label="West Ealing" days={timetables["west-ealing"]} hidden />
+
+      <div class="panel panel__pad mt-4" data-reveal style="background:var(--acid);">
+        <div class="split split--middle">
+          <div>
+            <span class="sticker sticker--pink">How to book</span>
+            <h3 class="mt-2">The app is the front door.</h3>
+            <p style="max-width:50ch;">
+              Classes are booked through the Energym Members App. If you're not a member yet,
+              book a tour and we'll walk you through it. TBC classes are being confirmed — the
+              desk has the latest.
+            </p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--ink" href="/contact">Ask the desk</a>
+            <a class="btn btn--sm" href="/classes">Class guide</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { clubs } from "../data/site";
+---
+
+<BaseLayout
+  title="Contact — Energym"
+  description="Contact Energym New Malden and West Ealing. Book a tour, ask about membership or talk to the team."
+>
+  <PageHero
+    eyebrow="Talk to us"
+    title="Let's talk."
+    lede="Questions about membership, classes, personal training or a tour? The desk is the fastest way in. Or send the form and we'll come back to you."
+    image="/img/gym/gym-floor.jpeg"
+    stamp="Book a tour"
+    tilt="-1deg"
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="grid" data-reveal>
+            {
+              Object.values(clubs).map((club) => (
+                <article class="panel panel__pad" style="transform:rotate(-.5deg);">
+                  <span class="sticker sticker--green">{club.shortName}</span>
+                  <h3 class="mt-2">{club.name}</h3>
+                  <p>{club.address.join(", ")}</p>
+                  <p style="font-family:var(--block);font-size:.8rem;">
+                    <a href={`tel:${club.phone.replace(/\s/g, "")}`}>{club.phone}</a><br />
+                    <a href={`mailto:${club.email}`}>{club.email}</a>
+                  </p>
+                  <p style="font-size:.86rem;color:rgba(11,11,11,.68);">{club.hours[0]}</p>
+                  <div class="btn-row mt-2">
+                    <a class="btn btn--sm" href={club.mapUrl} rel="noopener" target="_blank">Directions</a>
+                    <a class="btn btn--sm btn--ink" href={club.joinUrl} rel="noopener" target="_blank">Join</a>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+
+          <div class="panel panel__pad mt-4" data-reveal style="background:var(--ink);color:var(--paper);">
+            <h3>Prefer to just turn up?</h3>
+            <p style="color:rgba(243,234,215,.72);">
+              Book a tour and we'll show you the floor, the studios and the kit. No pressure,
+              no clipboard.
+            </p>
+            <span class="sticker sticker--pink">Same-day tours usually possible</span>
+          </div>
+        </div>
+
+        <div class="panel panel__pad" data-reveal style="transform:rotate(.6deg);">
+          <span class="sticker">Send a message</span>
+          <h2 class="mt-2" style="font-size:clamp(2rem,4vw,3.2rem);">Ask us anything.</h2>
+          <p style="color:rgba(11,11,11,.7);">
+            This is a concept form — it doesn't send yet. On the real site it would land with
+            the club team.
+          </p>
+
+          <form data-tour-form novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="club">Club</label>
+              <select id="club" name="club">
+                <option>New Malden</option>
+                <option>West Ealing</option>
+                <option>Either / not sure</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Membership, classes, personal training, a tour..."></textarea>
+            </div>
+            <button class="btn btn--ink" type="submit">Send it</button>
+          </form>
+
+          <div class="form-success mt-2" role="status">
+            <strong style="font-family:var(--display);font-size:1.6rem;text-transform:uppercase;">
+              Message received.
+            </strong>
+            <p style="margin:6px 0 0;">This is a demo — no message was actually sent. On the live site, the club team would get it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

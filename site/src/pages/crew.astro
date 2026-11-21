@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import CrewCard from "../components/CrewCard.astro";
+import { crew } from "../data/site";
+---
+
+<BaseLayout
+  title="The Crew — Energym"
+  description="Meet the personal trainers at Energym New Malden and West Ealing. Nineteen coaches, two clubs, one cast."
+>
+  <PageHero
+    eyebrow="The cast"
+    title="The crew."
+    lede="Nineteen personal trainers across two clubs. Every one of them is self-employed, obsessive about their craft, and ready to help you level up."
+    image="/img/gym/hero-energym-2021-79.jpeg"
+    stamp="19 trainers"
+    tilt="1deg"
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:clamp(24px,4vw,42px);">
+        <div class="timetable-toggle" role="group" aria-label="Filter crew by club">
+          <button type="button" data-crew-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-crew-filter="New Malden" aria-pressed="false">New Malden</button>
+          <button type="button" data-crew-filter="West Ealing" aria-pressed="false">West Ealing</button>
+        </div>
+        <p class="marker" style="font-size:1.1rem;color:var(--pink);margin:0;">
+          Pick your coach. Or let us match you.
+        </p>
+      </div>
+
+      <div class="crew-grid">
+        {crew.map((member, i) => <CrewCard member={member} index={i} />)}
+      </div>
+
+      <div class="panel panel__pad mt-4" data-reveal style="background:var(--acid);">
+        <div class="split split--middle">
+          <div>
+            <span class="sticker sticker--pink">The small print</span>
+            <h3 class="mt-2">All personal trainers are self-employed.</h3>
+            <p style="max-width:56ch;">
+              Energym does not bear responsibility for payments made to personal trainers at
+              the club. Please contact a member of the team directly for a free induction or
+              personal training.
+            </p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--ink" href="/contact">Ask for a match</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="wrap center">
+      <h2>Your first session is the hardest.</h2>
+      <p class="mt-2" style="max-width:50ch;margin-inline:auto;color:rgba(243,234,215,.75);">
+        Book a free induction, tell us what you're training for, and we'll put you with the
+        right coach.
+      </p>
+      <div class="btn-row mt-2" style="justify-content:center;">
+        <a class="btn" href="/contact">Book an induction</a>
+        <a class="btn btn--pink" href="/timetable">See classes</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

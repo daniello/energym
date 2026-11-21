@@ -1,0 +1,348 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Ticker from "../components/Ticker.astro";
+import SectionHead from "../components/SectionHead.astro";
+import CrewCard from "../components/CrewCard.astro";
+import VideoBay from "../components/VideoBay.astro";
+import { crew, clubs, prices, timetables } from "../data/site";
+
+const featuredCrew = crew.filter((m) => ["callum", "carla", "martyna", "shella"].includes(m.slug));
+const monday = timetables["new-malden"][0];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero__art">
+      <img src="/img/gym/hero-energym-2021-79.jpeg" alt="" aria-hidden="true" loading="eager" />
+      <span class="halftone"></span>
+    </div>
+
+    <div class="wrap hero__inner">
+      <div class="hero__kicker" data-hero-kicker>
+        <span class="kicker">New Malden × West Ealing</span>
+        <span class="sticker" data-pop>The comic issue</span>
+      </div>
+
+      <h1 class="hero__title">
+        <span class="line" data-hero-line>Bring the</span>
+        <span class="line green" data-hero-line>energy.</span>
+      </h1>
+
+      <p class="hero__sub" data-hero-line>We'll provide one hell of a gym.</p>
+
+      <p class="hero__lede" data-hero-lede>
+        If you're sick of treating the gym as a chore, want to rewire your approach to fitness
+        and lose yourself in a completely unique and intoxicating environment — we're ready
+        when you are.
+      </p>
+
+      <div class="hero__actions" data-hero-actions>
+        <a class="btn" href="/membership">Join the club</a>
+        <a class="btn btn--pink" href="/contact">Book a tour</a>
+        <a class="btn btn--paper" href="/crew">Meet the crew</a>
+      </div>
+
+      <div class="hero__stamp" data-pop>
+        <div class="burst">No<br />contracts</div>
+      </div>
+    </div>
+
+    <div class="wrap hero__footer">
+      <div class="hero__stat" data-hero-stat>
+        <strong>02</strong>
+        <span>Clubs in the crew</span>
+      </div>
+      <div class="hero__stat" data-hero-stat>
+        <strong>60+</strong>
+        <span>Classes every week</span>
+      </div>
+      <div class="hero__stat" data-hero-stat>
+        <strong>6am–11pm</strong>
+        <span>Open early. Open late.</span>
+      </div>
+    </div>
+  </section>
+
+  <Ticker />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--middle">
+        <div data-reveal>
+          <p class="eyebrow" style="color:var(--pink);margin-bottom:14px;">The manifesto</p>
+          <h2 class="quote">
+            We're not here to <em>fix</em> you. We're here to <em>unleash</em> you.
+          </h2>
+          <p class="mt-2" style="font-size:1.1rem;max-width:46ch;">
+            Our aim is to deconstruct the mindset of the average gym-goer. Back to basics.
+            Draw out the raw, innate drive that enables you to push yourself to the very limits
+            of your physical capabilities.
+          </p>
+          <p class="marker" style="font-size:1.2rem;color:var(--green-deep);">
+            Remember to bring the energy.
+          </p>
+        </div>
+
+        <div class="grid" data-reveal>
+          <article class="card card--ink">
+            <span class="index">01 /</span>
+            <h3>Adrenaline</h3>
+            <p>
+              Energym has been designed to inject every member who walks through the doors with
+              a shock dosage of adrenaline.
+            </p>
+          </article>
+          <article class="card card--green">
+            <span class="index">02 /</span>
+            <h3>Equality</h3>
+            <p>
+              Exceptional equipment and a carefully curated protein bar shouldn't be reserved
+              for the city slickers with deep pockets.
+            </p>
+          </article>
+          <article class="card">
+            <span class="index">03 /</span>
+            <h3>Transparency</h3>
+            <p>
+              No labyrinth of complex contracts. Our rolling monthly membership is as
+              transparent as it is affordable.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="wrap">
+      <div class="split split--middle">
+        <div data-reveal>
+          <p class="eyebrow" style="color:var(--acid);margin-bottom:14px;">Next drop</p>
+          <h2>The trailer bay.</h2>
+          <p class="mt-2" style="color:rgba(243,234,215,.75);max-width:44ch;">
+            A 20–30 second promo is being cut for the big screens. Until it lands, this is
+            the space it will live in — 16:9, sound-ready, loop-friendly.
+          </p>
+          <div class="stat-row mt-2">
+            <div>
+              <strong>4K</strong>
+              <span>Master</span>
+            </div>
+            <div>
+              <strong>20–30s</strong>
+              <span>Loop</span>
+            </div>
+            <div>
+              <strong>Muted</strong>
+              <span>Safe</span>
+            </div>
+          </div>
+        </div>
+        <div data-reveal>
+          <VideoBay />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="The floor"
+        title="Built for people who actually train."
+        aside="Six zones. Twenty squat racks at New Malden. Olympic platforms at West Ealing. No waiting for the one cable machine."
+        href="/new-malden"
+        linkLabel="Explore the clubs"
+      />
+
+      <div class="split">
+        <div class="panel" data-reveal style="transform:rotate(-1deg);">
+          <div class="comic-photo" style="aspect-ratio:4/3;">
+            <img src="/img/gym/gym-floor.jpeg" alt="The Energym gym floor" loading="lazy" />
+            <span class="halftone"></span>
+          </div>
+          <span class="sticker sticker--pink" style="position:absolute;bottom:18px;left:18px;">
+            20 squat racks
+          </span>
+        </div>
+
+        <div class="stack" data-reveal>
+          <article class="card card--lift">
+            <span class="index">Gold / Emerald</span>
+            <h3>Free weights & cables</h3>
+            <p>Dumbbells, benches, T-bar row, Smith machines, dual pulleys and every attachment you actually need.</p>
+          </article>
+          <article class="card card--lift">
+            <span class="index">Opal / Diamond</span>
+            <h3>Cardio & conditioning</h3>
+            <p>Treadmills, cross trainers, rowers, ski ergs, Wattbikes, sleds, monkey bars and a running track.</p>
+          </article>
+          <article class="card card--lift">
+            <span class="index">Onyx / Sapphire</span>
+            <h3>Strength & spin</h3>
+            <p>Olympic platforms, 45-degree leg press, pendulum squats, and an immersive spin studio.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--green">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="The cast"
+        title="The crew."
+        aside="Nineteen personal trainers. Two clubs. One comic cast. Every one of them is self-employed and ready to help you level up."
+        href="/crew"
+        linkLabel="Meet all 19"
+      />
+
+      <div class="crew-grid">
+        {featuredCrew.map((member, i) => <CrewCard member={member} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="This week"
+        title="Classes with a pulse."
+        aside="Over 60 classes a week across both clubs. Book through the Energym Members App."
+        href="/timetable"
+        linkLabel="Full timetable"
+      />
+
+      <div class="split">
+        <div class="panel panel__pad" data-reveal style="transform:rotate(.6deg);">
+          <span class="sticker">Monday / New Malden</span>
+          <div class="stack mt-2">
+            {
+              monday.slots.slice(0, 5).map((slot) => (
+                <div style="display:flex;align-items:baseline;gap:14px;border-bottom:2px dashed rgba(11,11,11,.22);padding-bottom:10px;">
+                  <strong style="font-family:var(--display);font-size:1.4rem;min-width:82px;">{slot.time}</strong>
+                  <div>
+                    <span style="font-family:var(--block);font-size:.82rem;text-transform:uppercase;">{slot.name}</span>
+                    <span style="display:block;font-size:.78rem;color:rgba(11,11,11,.6);">{slot.room} · {slot.duration}</span>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <a class="btn btn--sm mt-2" href="/timetable">See the full week</a>
+        </div>
+
+        <div class="panel" data-reveal style="transform:rotate(-.8deg);">
+          <div class="comic-photo comic-photo--pink" style="aspect-ratio:4/3;">
+            <img src="/img/gym/spin-class.jpeg" alt="Spin class at Energym" loading="lazy" />
+            <span class="halftone"></span>
+          </div>
+          <div class="panel__pad">
+            <h3>Lose yourself in the lights.</h3>
+            <p>Spin, yoga, boxing, pilates, strength lab and more. If it makes you sweat, it's probably on the timetable.</p>
+            <a class="btn btn--sm" href="/classes">Browse classes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="wrap">
+      <div class="split split--middle">
+        <div data-reveal>
+          <p class="eyebrow" style="color:var(--acid);margin-bottom:14px;">Membership</p>
+          <h2>One price.<br /><span style="color:var(--green);">No games.</span></h2>
+          <p class="mt-2" style="color:rgba(243,234,215,.75);max-width:44ch;">
+            Rolling monthly. One month notice. No contract. Two clubs. Day passes and annual
+            options also available.
+          </p>
+          <div class="btn-row mt-2">
+            <a class="btn" href="/membership">See all memberships</a>
+            <a class="btn btn--pink" href="/contact">Book a tour</a>
+          </div>
+        </div>
+
+        <div data-reveal>
+          <article class="price-card price-card--featured" style="transform:rotate(1.2deg);">
+            <span class="sticker sticker--pink" style="align-self:start;">Most popular</span>
+            <span class="price-card__label">Monthly / both clubs</span>
+            <strong class="price-card__price">{prices[0].price}<span style="font-size:.32em;"> p/m</span></strong>
+            <p class="price-card__note">{prices[0].note}</p>
+            <a class="btn btn--ink mt-2" href={clubs["new-malden"].joinUrl} rel="noopener" target="_blank">
+              Join New Malden
+            </a>
+            <a class="btn btn--ink" href={clubs["west-ealing"].joinUrl} rel="noopener" target="_blank">
+              Join West Ealing
+            </a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Find us"
+        title="Two clubs. One mindset."
+        aside="New Malden and West Ealing. Early doors, late nights, bank holidays included."
+      />
+
+      <div class="grid grid--2">
+        {
+          Object.values(clubs).map((club) => (
+            <article class="panel panel__pad card--lift" data-reveal>
+              <span class="sticker sticker--green">{club.shortName}</span>
+              <h3 class="mt-2">{club.name}</h3>
+              <p>{club.address.join(", ")}</p>
+              <p style="font-family:var(--block);font-size:.8rem;">
+                {club.phone} · {club.email}
+              </p>
+              <p style="font-size:.9rem;color:rgba(11,11,11,.68);">{club.hours[0]}</p>
+              <div class="btn-row mt-2">
+                <a class="btn btn--sm" href={`/${club.slug}`}>Club page</a>
+                <a class="btn btn--sm btn--ink" href={club.mapUrl} rel="noopener" target="_blank">Directions</a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--pink">
+    <div class="wrap center">
+      <p class="eyebrow" style="color:var(--ink);margin-bottom:14px;">The last panel</p>
+      <h2 style="font-size:clamp(3rem,9vw,7rem);">Ready to see it in person?</h2>
+      <p class="mt-2" style="max-width:48ch;margin-inline:auto;">
+        Walk the floor, meet the crew, try the kit. Book a tour at either club and we'll show you
+        what the comic can't.
+      </p>
+      <div class="btn-row mt-2" style="justify-content:center;">
+        <a class="btn btn--ink" href="/contact">Book a tour</a>
+        <a class="btn btn--paper" href="/membership">Join the club</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import gsap from "gsap";
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.addEventListener("astro:page-load", () => {
+    if (reduced) return;
+    const hero = document.querySelector(".hero");
+    if (!hero) return;
+
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.from("[data-hero-kicker]", { y: 16, opacity: 0, duration: 0.35 })
+      .from("[data-pop]", { scale: 0, rotate: -22, opacity: 0, duration: 0.45, stagger: 0.1, ease: "back.out(2)" }, "-=0.15")
+      .from("[data-hero-line]", { y: 30, opacity: 0, duration: 0.55, stagger: 0.07 }, "-=0.25")
+      .from("[data-hero-lede]", { y: 16, opacity: 0, duration: 0.4 }, "-=0.3")
+      .from("[data-hero-actions]", { y: 14, opacity: 0, duration: 0.35 }, "-=0.25")
+      .from("[data-hero-stat]", { y: 14, opacity: 0, duration: 0.3, stagger: 0.06 }, "-=0.2");
+  });
+</script>

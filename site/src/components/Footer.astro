@@ -1,0 +1,61 @@
+---
+import { clubs, nav } from "../data/site";
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/img/brand/energym-logo.png" alt="Energym" width="2478" height="546" />
+        <p>
+          Two clubs. One mindset. Bring the energy and we'll provide one hell of a gym.
+        </p>
+        <div class="btn-row mt-2">
+          <a class="btn btn--sm" href="/membership">Join the club</a>
+          <a class="btn btn--sm btn--pink" href="/contact">Book a tour</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>New Malden</h4>
+        <p>{clubs["new-malden"].address.join(", ")}</p>
+        <a href={`tel:${clubs["new-malden"].phone.replace(/\s/g, "")}`}>{clubs["new-malden"].phone}</a>
+        <a href={`mailto:${clubs["new-malden"].email}`}>{clubs["new-malden"].email}</a>
+        <p class="mt-2">{clubs["new-malden"].hours[0]}</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>West Ealing</h4>
+        <p>{clubs["west-ealing"].address.join(", ")}</p>
+        <a href={`tel:${clubs["west-ealing"].phone.replace(/\s/g, "")}`}>{clubs["west-ealing"].phone}</a>
+        <a href={`mailto:${clubs["west-ealing"].email}`}>{clubs["west-ealing"].email}</a>
+        <p class="mt-2">{clubs["west-ealing"].hours[0]}</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <a href="https://www.instagram.com/energymnewmalden/" rel="noopener" target="_blank">Instagram / New Malden</a>
+        <a href="https://www.instagram.com/energymwestealing/" rel="noopener" target="_blank">Instagram / West Ealing</a>
+        <a href="https://en-gb.facebook.com/EnergymNewMalden/" rel="noopener" target="_blank">Facebook / New Malden</a>
+        <a href="https://www.facebook.com/EnerGymWestEaling" rel="noopener" target="_blank">Facebook / West Ealing</a>
+        <a href="https://www.youtube.com/channel/UCaK4oDY8j2g6f0o-zpuDurw" rel="noopener" target="_blank">YouTube</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {new Date().getFullYear()} Energym. Concept prototype — not the live site.</span>
+      <nav aria-label="Footer">
+        {
+          nav.slice(1).map((item) => (
+            <a href={item.href} style="display:inline-block;margin-right:16px;">
+              {item.label}
+            </a>
+          ))
+        }
+        <a href="https://www.energym.co.uk/covid-19" rel="noopener" target="_blank" style="display:inline-block;margin-right:16px;">Covid-19</a>
+        <a href="https://www.energym.co.uk/club-rules" rel="noopener" target="_blank" style="display:inline-block;margin-right:16px;">Club etiquette</a>
+        <a href="https://www.energym.co.uk/t-cs" rel="noopener" target="_blank" style="display:inline-block;">T&Cs</a>
+      </nav>
+    </div>
+  </div>
+</footer>
