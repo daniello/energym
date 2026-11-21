@@ -13,7 +13,19 @@ const monday = timetables["new-malden"][0];
 <BaseLayout>
   <section class="hero">
     <div class="hero__art">
-      <img src="/img/gym/hero-energym-2021-79.jpeg" alt="" aria-hidden="true" loading="eager" />
+      <video
+        class="hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/img/gym/hero-video-poster.jpg"
+        aria-hidden="true"
+      >
+        <source src="/video/join-the-crew-hero.mp4" type="video/mp4" />
+      </video>
+      <img class="hero__fallback" src="/img/gym/hero-video-poster.jpg" alt="" aria-hidden="true" loading="eager" />
       <span class="halftone"></span>
     </div>
 
@@ -117,29 +129,32 @@ const monday = timetables["new-malden"][0];
     <div class="wrap">
       <div class="split split--middle">
         <div data-reveal>
-          <p class="eyebrow" style="color:var(--acid);margin-bottom:14px;">Next drop</p>
-          <h2>The trailer bay.</h2>
+          <p class="eyebrow" style="color:var(--acid);margin-bottom:14px;">The first cut</p>
+          <h2>The nod.</h2>
           <p class="mt-2" style="color:rgba(243,234,215,.75);max-width:44ch;">
-            A 20–30 second promo is being cut for the big screens. Until it lands, this is
-            the space it will live in — 16:9, sound-ready, loop-friendly.
+            Fifteen seconds of comic-book Energym, made for the big screens. Sound on.
           </p>
           <div class="stat-row mt-2">
             <div>
-              <strong>4K</strong>
-              <span>Master</span>
+              <strong>15s</strong>
+              <span>Spot</span>
             </div>
             <div>
-              <strong>20–30s</strong>
-              <span>Loop</span>
+              <strong>16:9</strong>
+              <span>Big screen</span>
             </div>
             <div>
-              <strong>Muted</strong>
-              <span>Safe</span>
+              <strong>Sound</strong>
+              <span>On</span>
             </div>
           </div>
         </div>
         <div data-reveal>
-          <VideoBay />
+          <VideoBay
+            src="/video/join-the-crew.mp4"
+            poster="/img/gym/hero-video-poster.jpg"
+            label="The Nod — Energym promo"
+          />
         </div>
       </div>
     </div>
@@ -234,7 +249,7 @@ const monday = timetables["new-malden"][0];
 
         <div class="panel" data-reveal style="transform:rotate(-.8deg);">
           <div class="comic-photo comic-photo--pink" style="aspect-ratio:4/3;">
-            <img src="/img/gym/spin-class.jpeg" alt="Spin class at Energym" loading="lazy" />
+            <img src="/img/gym/hero-energym-2021-79.jpeg" alt="Spin class at Energym" loading="lazy" />
             <span class="halftone"></span>
           </div>
           <div class="panel__pad">
@@ -337,6 +352,9 @@ const monday = timetables["new-malden"][0];
     const hero = document.querySelector(".hero");
     if (!hero) return;
 
+    const heroVideo = document.querySelector<HTMLVideoElement>(".hero__video");
+    heroVideo?.play().catch(() => {});
+
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
     tl.from("[data-hero-kicker]", { y: 16, opacity: 0, duration: 0.35 })
       .from("[data-pop]", { scale: 0, rotate: -22, opacity: 0, duration: 0.45, stagger: 0.1, ease: "back.out(2)" }, "-=0.15")
@@ -344,5 +362,10 @@ const monday = timetables["new-malden"][0];
       .from("[data-hero-lede]", { y: 16, opacity: 0, duration: 0.4 }, "-=0.3")
       .from("[data-hero-actions]", { y: 14, opacity: 0, duration: 0.35 }, "-=0.25")
       .from("[data-hero-stat]", { y: 14, opacity: 0, duration: 0.3, stagger: 0.06 }, "-=0.2");
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (reduced || document.visibilityState !== "visible") return;
+    document.querySelector<HTMLVideoElement>(".hero__video")?.play().catch(() => {});
   });
 </script>

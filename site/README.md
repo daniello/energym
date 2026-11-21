@@ -61,11 +61,22 @@ Data lives in `src/data/site.ts`. Update prices, timetable slots or crew there.
 - `prefers-reduced-motion` disables the big entrance, ticker and scanline
   animations.
 
+## Video
+
+- `public/video/join-the-crew.mp4` — the full 15s cut (with audio and end
+  card), used in “The Nod” trailer bay.
+- `public/video/join-the-crew-hero.mp4` — a 12.3s silent, trimmed loop used as
+  the hero background.
+- `public/img/gym/hero-video-poster.jpg` — poster/fallback frame.
+- The hero video is muted, autoplays and loops; reduced-motion users see the
+  poster instead. The trailer bay uses native controls and keeps the audio.
+
 ## Known prototype shortcuts
 
 - The contact form is client-side only and shows a demo success message.
 - Join buttons open the existing Clubwise pages.
 - "Book a tour" routes to `/contact`; there is no booking backend.
 - TBC timetable slots are shown as TBC stickers.
-- The video bay is a designed placeholder for the future promo.
 - Legal/small-print links go to the existing live Energym pages.
+- The video is a concept cut; get consent before using real staff likeness in
+  any public or paid version.

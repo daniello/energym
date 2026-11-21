@@ -1,20 +1,36 @@
 ---
 type Props = {
+  src?: string;
+  poster?: string;
   label?: string;
   sub?: string;
 };
-const { label = "The promo drops here", sub = "16:9 · sound on · loop ready" } = Astro.props;
+
+const { src, poster, label = "The promo drops here", sub = "16:9 · sound on · loop ready" } = Astro.props;
 ---
 
-<div class="video-bay" data-video-bay aria-label="Reserved space for the Energym promo video">
-  <div class="video-bay__bg"></div>
-  <div class="video-bay__scan"></div>
-  <span class="video-bay__corner video-bay__corner--tl">Energym / trailer bay</span>
-  <span class="video-bay__corner video-bay__corner--br">1920 × 1080 · 16:9</span>
-  <div class="video-bay__content">
-    <div class="video-bay__play" aria-hidden="true"></div>
-    <p class="video-bay__label">{label}</p>
-    <p class="video-bay__sub">{sub}</p>
-    <span class="sticker sticker--pink" style="margin-top:18px;">Coming soon</span>
-  </div>
-</div>
+{
+  src ? (
+    <div class="video-bay video-bay--player" aria-label={label}>
+      <video controls playsinline preload="metadata" poster={poster}>
+        <source src={src} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <span class="video-bay__corner video-bay__corner--tl">Energym / The Nod</span>
+      <span class="video-bay__corner video-bay__corner--tr">15s · 16:9 · sound on</span>
+    </div>
+  ) : (
+    <div class="video-bay" data-video-bay aria-label="Reserved space for the Energym promo video">
+      <div class="video-bay__bg"></div>
+      <div class="video-bay__scan"></div>
+      <span class="video-bay__corner video-bay__corner--tl">Energym / trailer bay</span>
+      <span class="video-bay__corner video-bay__corner--br">1920 × 1080 · 16:9</span>
+      <div class="video-bay__content">
+        <div class="video-bay__play" aria-hidden="true"></div>
+        <p class="video-bay__label">{label}</p>
+        <p class="video-bay__sub">{sub}</p>
+        <span class="sticker sticker--pink" style="margin-top:18px;">Coming soon</span>
+      </div>
+    </div>
+  )
+}

@@ -776,11 +776,23 @@ p {
   opacity: 0.6;
 }
 
-.hero__art img {
+.hero__art img,
+.hero__art video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.hero__art img {
   filter: grayscale(1) contrast(1.45) brightness(0.65);
+}
+
+.hero__video {
+  filter: contrast(1.08) saturate(1.05) brightness(0.62);
+}
+
+.hero__fallback {
+  display: none;
 }
 
 .hero__art::after {
@@ -843,13 +855,27 @@ p {
     position: static;
     justify-self: start;
   }
+  /* On phones the video becomes its own 16:9 panel above the copy,
+     instead of sitting behind the text and being obscured. */
   .hero__art {
-    opacity: 0.45;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    opacity: 1;
+    border-bottom: 4px solid var(--green);
   }
   .hero__art::after {
-    background:
-      linear-gradient(90deg, var(--ink) 15%, rgba(11, 11, 11, 0.85) 65%),
-      linear-gradient(0deg, var(--ink) 0%, transparent 55%);
+    background: linear-gradient(180deg, transparent 62%, rgba(11, 11, 11, 0.62));
+  }
+  .hero__art .halftone {
+    opacity: 0.22;
+  }
+  .hero__video {
+    filter: brightness(0.95) contrast(1.04) saturate(1.05);
+  }
+  .hero__inner {
+    padding-block: 28px 18px;
   }
 }
 
@@ -956,6 +982,28 @@ p {
 .video-bay__corner--br {
   bottom: 14px;
   right: 16px;
+}
+
+.video-bay__corner--tr {
+  top: 14px;
+  right: 16px;
+}
+
+.video-bay--player {
+  background: #000;
+  padding: 0;
+}
+
+.video-bay--player video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-bay--player .video-bay__corner {
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
 }
 
 /* ---------- section headers ---------- */
@@ -1586,6 +1634,12 @@ p {
   .ticker__track,
   .video-bay__scan {
     animation: none;
+  }
+  .hero__video {
+    display: none;
+  }
+  .hero__fallback {
+    display: block;
   }
 }
 
