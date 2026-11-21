@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://energym-comic.vercel.app",
+  site: "https://eg.lambder.com",
   prefetch: true,
   build: {
     inlineStylesheets: "auto",
