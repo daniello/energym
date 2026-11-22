@@ -847,7 +847,7 @@ p {
   color: rgba(243, 234, 215, 0.65);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 980px) {
   .hero__footer {
     grid-template-columns: 1fr;
   }
@@ -855,7 +855,7 @@ p {
     position: static;
     justify-self: start;
   }
-  /* On phones the video becomes its own 16:9 panel above the copy,
+  /* On smaller screens the video becomes its own 16:9 panel above the copy,
      instead of sitting behind the text and being obscured. */
   .hero__art {
     position: relative;

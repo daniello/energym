@@ -65,8 +65,6 @@ Data lives in `src/data/site.ts`. Update prices, timetable slots or crew there.
 
 - `public/video/join-the-crew.mp4` — the full 15s cut (with audio and end
   card), used in “The Nod” trailer bay.
-- `public/video/join-the-crew-hero.mp4` — a 12.3s silent, trimmed loop used as
-  the hero background.
 - `public/img/gym/hero-video-poster.jpg` — poster/fallback frame.
 - The hero video is muted, autoplays and loops; reduced-motion users see the
   poster instead. The trailer bay uses native controls and keeps the audio.
